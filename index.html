@@ -7,9 +7,9 @@
 <title>Guante Tereré</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-:root{--bg:#eef1f7;--fg:#101828;--card:#fff;--mut:#5b6577;--bd:#d8dde6;--acc:#2547d0;--accf:#fff;--amb:#c77d00;--ok:#127a4f;--scr:#0b1226;--scrf:#f3f6ff;--sh:0 10px 28px -18px rgba(16,24,40,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--sh:0 10px 28px -18px #000}}
-:root[data-theme="dark"]{--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--sh:0 10px 28px -18px #000}
+:root{--bg:#eef1f7;--fg:#101828;--card:#fff;--mut:#5b6577;--bd:#d8dde6;--acc:#2547d0;--accf:#fff;--amb:#c77d00;--ok:#127a4f;--scr:#e8edf9;--scrf:#0b1226;--sh:0 10px 28px -18px rgba(16,24,40,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--scrf:#f3f6ff;--sh:0 10px 28px -18px #000}}
+:root[data-theme="dark"]{--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--scrf:#f3f6ff;--sh:0 10px 28px -18px #000}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.5 "Atkinson Hyperlegible",system-ui,sans-serif}
@@ -53,10 +53,10 @@ dialog h2{font-size:1.3rem;margin:0 0 6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 dialog .row{margin-top:14px}
 .card{background:var(--card);border:1.5px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
-#pt>.card:first-child{background:var(--scr);border-color:var(--scr);padding:20px 18px}
+#pt>.card:first-child{background:var(--scr);border-color:var(--bd);padding:20px 18px}
 .txt{color:var(--scrf);font-size:clamp(2.1rem,10vw,3.2rem);font-weight:700;letter-spacing:.05em;line-height:1.15;min-height:3.5em;word-break:break-word;white-space:pre-wrap}
 .txt::after{content:"";display:inline-block;width:.09em;height:.85em;margin-left:.08em;background:var(--amb);vertical-align:-.05em;animation:bl 1.1s steps(1) infinite}
-.txt[data-e]::before{content:"Haz una seña…";color:#8d98b3;font-weight:400;letter-spacing:0;font-size:.55em}
+.txt[data-e]::before{content:"Haz una seña…";color:var(--mut);font-weight:400;letter-spacing:0;font-size:.55em}
 @keyframes bl{50%{opacity:0}}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .row>*{flex:1 1 auto}
@@ -85,12 +85,12 @@ h2{font-size:1.1rem;margin:0 0 10px}
 #msg.show{opacity:1}
 .tools{display:flex;gap:8px;margin:-4px 0 14px}
 .tools button{flex:1;min-height:42px;font-size:.9rem;padding:6px 10px}
-#kiosk{position:fixed;inset:0;z-index:50;background:var(--scr);color:var(--scrf);display:grid;place-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) calc(24px + env(safe-area-inset-left,0px))}
+#kiosk{position:fixed;inset:0;z-index:50;background:var(--scr);color:var(--scrf);display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top),env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left),env(safe-area-inset-right))}
 #kiosk[hidden]{display:none}
 #ktxt{font-weight:700;letter-spacing:.05em;line-height:1.1;text-align:center;word-break:break-word;white-space:pre-wrap;max-width:100%}
-#ktxt:empty::before{content:"Haz una seña…";font-size:6vh;font-weight:400;letter-spacing:0;color:#8d98b3}
-#kx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));min-height:40px;padding:6px 14px;background:rgba(255,255,255,.1);color:var(--scrf);border-color:rgba(255,255,255,.25);opacity:.7}
-#kiosk .rot{display:none;position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));font-size:.9rem;color:#8d98b3}
+#ktxt:empty::before{content:"Haz una seña…";font-weight:400;letter-spacing:0;color:var(--mut)}
+#kx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));min-height:40px;padding:6px 14px;background:var(--card);color:var(--fg);border-color:var(--bd);opacity:.85}
+#kiosk .rot{display:none;position:absolute;left:0;right:0;text-align:center;bottom:calc(16px + env(safe-area-inset-bottom,0px));font-size:.9rem;color:var(--mut)}
 @media (orientation:portrait){#kiosk .rot{display:block}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.txt::after,.spin,dialog[open]{animation:none}}
 </style>
@@ -193,7 +193,7 @@ function render(){const e=$('#txt');e.textContent=text;text?e.removeAttribute('d
 let wl=null;
 function pintaK(){
   const t=text.length>80?'…'+text.slice(-80):text,n=t.length,k=$('#ktxt');
-  k.textContent=t;k.style.fontSize=(n<=6?30:n<=14?20:n<=30?12:7)+'vh'
+  k.textContent=t;k.style.fontSize=(n===0?6:n<=6?30:n<=14?20:n<=30?12:7)+'vh'
 }
 async function abrirKiosk(){
   $('#kiosk').hidden=false;pintaK();
