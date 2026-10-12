@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guante Tereré</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#f3f5f8;--fg:#101828;--card:#fff;--mut:#5b6577;--bd:#d8dde6;--acc:#2547d0;--accf:#fff;--amb:#c77d00;--ok:#127a4f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1320;--fg:#eef1f7;--card:#171e30;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0e1320;--amb:#f2b43d;--ok:#4cd39a}}
+:root[data-theme="dark"]{--bg:#0e1320;--fg:#eef1f7;--card:#171e30;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0e1320;--amb:#f2b43d;--ok:#4cd39a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+h1{font-size:1.25rem;margin:0;flex:1}
+.pill{font-size:.85rem;padding:4px 10px;border-radius:99px;border:1.5px solid var(--bd);color:var(--mut)}
+.pill.on{border-color:var(--ok);color:var(--ok)}
+button{font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--bd);border-radius:12px;padding:10px 14px;cursor:pointer;min-height:44px}
+button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.pri{background:var(--acc);border-color:var(--acc);color:var(--accf);font-weight:700}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tabs button{flex:1}
+.tabs button.on{border-color:var(--acc);color:var(--acc);font-weight:700}
+.card{background:var(--card);border:1.5px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+.txt{font-size:clamp(2rem,9vw,3rem);font-weight:700;letter-spacing:.04em;min-height:2.6em;word-break:break-word;white-space:pre-wrap}
+.txt[data-e]::before{content:"Haz una seña…";color:var(--mut);font-weight:400;letter-spacing:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1 1 auto}
+.det{display:flex;align-items:center;gap:14px}
+.ring{width:92px;height:92px;flex:none;position:relative}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:7}
+.ring .bg{stroke:var(--bd)}
+.ring .fg{stroke:var(--amb);stroke-linecap:round;stroke-dasharray:276.5;stroke-dashoffset:276.5;transition:stroke-dashoffset .12s linear}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.5rem}
+.small{font-size:.9rem;color:var(--mut)}
+label.sw{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:.95rem}
+input[type=checkbox]{width:22px;height:22px;accent-color:var(--acc)}
+h2{font-size:1.05rem;margin:0 0 8px}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.k{position:relative;padding:8px 0;min-height:46px;font-weight:700;font-size:1rem}
+.k.sp{grid-column:span 3;font-size:.8rem}
+.k.on{border-color:var(--acc);background:var(--acc);color:var(--accf)}
+.k i{position:absolute;top:2px;right:4px;font:normal 700 .65rem/1 inherit;color:var(--mut)}
+.k.on i{color:var(--accf)}
+.k.has:not(.on){border-color:var(--ok)}
+.lr{display:grid;grid-template-columns:70px 1fr 36px;gap:8px;align-items:center;font-size:.85rem;margin:4px 0}
+.bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc)}
+#msg{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:616px;margin:auto;background:var(--fg);color:var(--bg);padding:12px 14px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s}
+#msg.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>Guante Tereré</h1><span id="st" class="pill">Desconectado</span><button id="bc" class="pri">Conectar</button></header>
+<div class="tabs"><button data-t="t" class="on">Traducir</button><button data-t="e">Entrenar</button></div>
+
+<section id="pt">
+  <div class="card"><div id="txt" class="txt" data-e="1" aria-live="polite"></div></div>
+  <div class="card det">
+    <div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="44"/><circle class="fg" id="prog" cx="50" cy="50" r="44"/></svg><b id="det">–</b></div>
+    <div><div><b>Detectando</b></div><div class="small">Mantén la seña un momento para escribirla. Para repetir una letra, cambia de seña y vuelve.</div></div>
+  </div>
+  <div class="row">
+    <button id="say">Hablar todo</button><button id="back">Borrar última</button><button id="clr">Limpiar</button>
+  </div>
+  <label class="sw"><input type="checkbox" id="auto" checked> Decir cada palabra al terminarla</label>
+  <p class="small">Sin guante puedes probar con el teclado: letras, números, espacio, Retroceso y Esc.</p>
+</section>
+
+<section id="pe" hidden>
+  <div class="card">
+    <h2>1. Calibrar</h2>
+    <div class="row"><button id="cao">Mano abierta</button><button id="caf">Puño cerrado</button></div>
+    <p class="small">Pulsa cada botón con la mano en esa posición y quieta, tomando ~1 segundo. Repite si cambias de guante.</p>
+  </div>
+  <div class="card">
+    <h2>2. Enseñar cada seña</h2>
+    <div id="grid" class="grid"></div>
+    <p id="hint" class="small"></p>
+    <div class="row"><button id="rec" class="pri">Grabar muestra</button><button id="del">Borrar esta seña</button></div>
+    <p class="small">Elige un símbolo, haz la seña con la mano quieta y pulsa Grabar. Graba 3 a 5 muestras por símbolo, moviendo un poco la mano entre una y otra. El número verde es la cantidad de muestras.</p>
+    <button id="all">Borrar todas las señas</button>
+  </div>
+  <div class="card"><h2>Lecturas en vivo</h2><div id="live"></div></div>
+</section>
+</div>
+<div id="msg" role="status"></div>
+
+<script>
+const SVC='7a1c0001-5b3e-4c8a-9d2f-6a7b8c9d0e01',U=n=>'7a1c000'+n+'-5b3e-4c8a-9d2f-6a7b8c9d0e01';
+const SYM=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789','ESPACIO','REINICIAR'];
+const HINT={36:'Sugerencia: puño cerrado con el pulgar hacia arriba.',37:'Sugerencia: mano abierta con la palma hacia arriba (el acelerómetro lo distingue de las letras).'};
+const $=s=>document.querySelector(s);
+let dev,chCmd,text='',sel=0,counts=Array(38).fill(0),conn=false,manual=false,tries=0,tm;
+const enc=new TextEncoder(),dec=new TextDecoder();
+
+function msg(t){const m=$('#msg');m.textContent=t;m.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>m.classList.remove('show'),3500)}
+function render(){const e=$('#txt');e.textContent=text;text?e.removeAttribute('data-e'):e.setAttribute('data-e','1')}
+function decir(t){if(!t||!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';speechSynthesis.speak(u)}
+function evento(s){
+  if(s==='SPACE'){if(text&&!text.endsWith(' ')){const w=text.trim().split(' ').pop();text+=' ';if($('#auto').checked)decir(w)}}
+  else if(s==='RESET'){text=''}
+  else text+=s;
+  render();if(navigator.vibrate)navigator.vibrate(40)
+}
+function setConn(v){conn=v;const s=$('#st');s.textContent=v?'Conectado':'Desconectado';s.classList.toggle('on',v);$('#bc').textContent=v?'Desconectar':'Conectar';
+  ['rec','del','all','cao','caf'].forEach(i=>$('#'+i).disabled=!v)}
+
+async function cmd(c){if(!chCmd||!conn)return msg('Conecta el guante primero.');try{await chCmd.writeValue(enc.encode(c))}catch(e){msg('No se pudo enviar el comando.')}}
+function onData(e){
+  const v=e.target.value,live=document.querySelectorAll('#live .lr');
+  for(let i=0;i<8;i++){const x=i<5?v.getUint8(i):v.getInt8(i);live[i].querySelector('i').style.width=(i<5?x:(x+100)/2)+'%';live[i].querySelector('b').textContent=x}
+  const c=v.getInt8(8),p=v.getUint8(9);
+  $('#det').textContent=c>=0?(c<36?SYM[c]:(c===36?'␣':'↺')):'–';
+  $('#prog').style.strokeDashoffset=276.5*(1-(c>=0?p/100:0))
+}
+function onEv(e){
+  const s=dec.decode(e.target.value),t=s.slice(2);
+  if(s[0]==='E')evento(t);
+  else if(s[0]==='C'){const[n,k]=t.split(':').map(Number);counts[n]=k;grid()}
+  else{if(t==='BORRADO'){counts.fill(0);grid()}msg(t)}
+}
+async function abrir(){
+  const srv=await dev.gatt.connect(),svc=await srv.getPrimaryService(SVC);
+  chCmd=await svc.getCharacteristic(U(4));
+  const d=await svc.getCharacteristic(U(2)),e=await svc.getCharacteristic(U(3));
+  d.addEventListener('characteristicvaluechanged',onData);e.addEventListener('characteristicvaluechanged',onEv);
+  await d.startNotifications();await e.startNotifications();
+  setConn(true);tries=0;await cmd('STAT')
+}
+function reconectar(){if(manual||conn||tries>=3)return;tries++;msg('Reconectando…');setTimeout(()=>abrir().catch(reconectar),1500)}
+function onDesc(){setConn(false);reconectar()}
+async function conectar(){
+  if(conn){manual=true;dev.gatt.disconnect();return}
+  if(!navigator.bluetooth)return msg('Este navegador no admite Web Bluetooth. Usa Chrome en Android o PC (en iPhone, la app Bluefy).');
+  try{
+    manual=false;
+    dev=await navigator.bluetooth.requestDevice({filters:[{services:[SVC]},{namePrefix:'Guante'}],optionalServices:[SVC]});
+    dev.addEventListener('gattserverdisconnected',onDesc);
+    await abrir()
+  }catch(e){
+    if(e.name==='SecurityError')msg('Este visor bloquea el Bluetooth. Abre la página directamente en Chrome.');
+    else if(e.name!=='NotFoundError')msg('No se pudo conectar: '+e.message)
+  }
+}
+
+function grid(){
+  const g=$('#grid');g.innerHTML='';
+  SYM.forEach((s,i)=>{const b=document.createElement('button');b.className='k'+(i>35?' sp':'')+(i===sel?' on':'')+(counts[i]?' has':'');
+    b.textContent=i===36?'␣ ESPACIO':i===37?'↺ REINICIAR':s;
+    if(counts[i]){const n=document.createElement('i');n.textContent=counts[i];b.append(n)}
+    b.onclick=()=>{sel=i;grid()};g.append(b)});
+  $('#hint').textContent=HINT[sel]||'';
+  $('#rec').textContent='Grabar muestra de '+(sel<36?SYM[sel]:sel===36?'ESPACIO':'REINICIAR')
+}
+const names=['Pulgar','Índice','Medio','Anular','Meñique','Acel X','Acel Y','Acel Z'];
+$('#live').innerHTML=names.map(n=>'<div class="lr"><span>'+n+'</span><div class="bar"><i></i></div><b>0</b></div>').join('');
+
+$('#bc').onclick=conectar;
+$('#say').onclick=()=>decir(text.trim());
+$('#back').onclick=()=>{text=text.slice(0,-1);render()};
+$('#clr').onclick=()=>{text='';render()};
+$('#cao').onclick=()=>{msg('Mantén la mano abierta y quieta…');cmd('CALO')};
+$('#caf').onclick=()=>{msg('Mantén el puño cerrado y quieto…');cmd('CALF')};
+$('#rec').onclick=()=>{msg('Grabando… no muevas la mano.');cmd('REC:'+sel)};
+$('#del').onclick=()=>cmd('DEL:'+sel);
+$('#all').onclick=()=>{if(confirm('¿Borrar todas las señas guardadas en el guante?')){cmd('CLR');counts.fill(0);grid()}};
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $('#pt').hidden=b.dataset.t!=='t';$('#pe').hidden=b.dataset.t!=='e'});
+addEventListener('keydown',e=>{
+  const k=e.key;
+  if(/^[a-z0-9]$/i.test(k))evento(k.toUpperCase());
+  else if(k===' '){e.preventDefault();evento('SPACE')}
+  else if(k==='Escape')evento('RESET');
+  else if(k==='Backspace'){text=text.slice(0,-1);render()}
+});
+setConn(false);grid();render();
+</script>
+</body>
+</html>
