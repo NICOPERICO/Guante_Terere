@@ -33,9 +33,11 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .tabs.e .ind{transform:translateX(calc(100% + 4px))}
 .tabs button{position:relative;z-index:1;flex:1;border:0;background:transparent;border-radius:14px;font-weight:700;color:var(--mut);transition:color .3s}
 .tabs button.on{color:var(--accf)}
-.views{box-sizing:content-box;overflow:hidden;margin:-8px;padding:8px;transition:height .35s cubic-bezier(.4,0,.2,1)}
+.views{overflow:hidden;margin:-6px -10px -22px;transition:height .35s cubic-bezier(.4,0,.2,1)}
 .track{display:flex;align-items:flex-start;transition:transform .35s cubic-bezier(.4,0,.2,1)}
-.track>section{flex:0 0 100%;min-width:0}
+.track>section{flex:0 0 100%;min-width:0;padding:6px 10px 22px;transition:visibility 0s .35s}
+.track>section:not([inert]){transition-delay:0s}
+.track>section[inert]{visibility:hidden}
 dialog{border:0;border-radius:24px;padding:22px;width:min(92vw,440px);background:var(--card);color:var(--fg);box-shadow:0 24px 60px -20px rgba(0,0,0,.6)}
 dialog::backdrop{background:rgba(5,9,19,.62);backdrop-filter:blur(3px)}
 dialog[open]{animation:pop .24s ease-out}
@@ -79,14 +81,24 @@ h2{font-size:1.1rem;margin:0 0 10px}
 .lr{display:grid;grid-template-columns:72px 1fr 36px;gap:10px;align-items:center;font-size:.85rem;margin:6px 0}
 .bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--acc);border-radius:6px;transition:width .1s linear}
-#msg{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:636px;margin:auto;background:var(--fg);color:var(--bg);padding:13px 16px;border-radius:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
+#msg{z-index:60;position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:636px;margin:auto;background:var(--fg);color:var(--bg);padding:13px 16px;border-radius:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
 #msg.show{opacity:1}
+.tools{display:flex;gap:8px;margin:-4px 0 14px}
+.tools button{flex:1;min-height:42px;font-size:.9rem;padding:6px 10px}
+#kiosk{position:fixed;inset:0;z-index:50;background:var(--scr);color:var(--scrf);display:grid;place-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) calc(24px + env(safe-area-inset-left,0px))}
+#kiosk[hidden]{display:none}
+#ktxt{font-weight:700;letter-spacing:.05em;line-height:1.1;text-align:center;word-break:break-word;white-space:pre-wrap;max-width:100%}
+#ktxt:empty::before{content:"Haz una seña…";font-size:6vh;font-weight:400;letter-spacing:0;color:#8d98b3}
+#kx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));min-height:40px;padding:6px 14px;background:rgba(255,255,255,.1);color:var(--scrf);border-color:rgba(255,255,255,.25);opacity:.7}
+#kiosk .rot{display:none;position:absolute;bottom:calc(16px + env(safe-area-inset-bottom,0px));font-size:.9rem;color:#8d98b3}
+@media (orientation:portrait){#kiosk .rot{display:block}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.txt::after,.spin,dialog[open]{animation:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header><h1><span class="logo">🧤</span>Guante Tereré</h1><span id="st" class="pill">Desconectado</span><button id="bc" class="pri">Conectar</button></header>
+<div class="tools"><button id="theme">🌓 Tema: Auto</button><button id="fs">📺 Modo letras</button></div>
 <div class="tabs" id="tabs" role="tablist"><i class="ind"></i><button data-t="t" class="on" role="tab" aria-selected="true">Traducir</button><button data-t="e" role="tab" aria-selected="false">Entrenar</button></div>
 <div class="views" id="views"><div class="track" id="track">
 
@@ -122,6 +134,8 @@ h2{font-size:1.1rem;margin:0 0 10px}
 </div></div>
 </div>
 <div id="msg" role="status"></div>
+
+<div id="kiosk" hidden><button id="kx">✕ Salir</button><div id="ktxt" aria-live="polite"></div><div class="rot">Gira el teléfono en horizontal</div></div>
 
 <dialog id="dlg" aria-labelledby="dt">
   <div class="st" data-for="pre">
@@ -162,11 +176,37 @@ const SVC='7a1c0001-5b3e-4c8a-9d2f-6a7b8c9d0e01',U=n=>'7a1c000'+n+'-5b3e-4c8a-9d
 const SYM=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789','ESPACIO','REINICIAR'];
 const HINT={36:'Sugerencia: puño cerrado con el pulgar hacia arriba.',37:'Sugerencia: mano abierta con la palma hacia arriba (el acelerómetro lo distingue de las letras).'};
 const $=s=>document.querySelector(s);
+const TH=['auto','light','dark'],TL={auto:'🌓 Tema: Auto',light:'☀️ Tema: Claro',dark:'🌙 Tema: Oscuro'};
+let th='auto';try{th=localStorage.getItem('tema')||'auto'}catch(e){}
+if(!TL[th])th='auto';
+function aplicaTema(){
+  if(th==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',th);
+  $('#theme').textContent=TL[th]
+}
+$('#theme').onclick=()=>{th=TH[(TH.indexOf(th)+1)%3];try{localStorage.setItem('tema',th)}catch(e){}aplicaTema()};
+aplicaTema();
 let dev,chCmd,text='',sel=0,counts=Array(38).fill(0),conn=false,manual=false,tries=0,tm;
 const enc=new TextEncoder(),dec=new TextDecoder();
 
 function msg(t){const m=$('#msg');m.textContent=t;m.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>m.classList.remove('show'),3500)}
-function render(){const e=$('#txt');e.textContent=text;text?e.removeAttribute('data-e'):e.setAttribute('data-e','1')}
+function render(){const e=$('#txt');e.textContent=text;text?e.removeAttribute('data-e'):e.setAttribute('data-e','1');if(!$('#kiosk').hidden)pintaK()}
+let wl=null;
+function pintaK(){
+  const t=text.length>80?'…'+text.slice(-80):text,n=t.length,k=$('#ktxt');
+  k.textContent=t;k.style.fontSize=(n<=6?30:n<=14?20:n<=30?12:7)+'vh'
+}
+async function abrirKiosk(){
+  $('#kiosk').hidden=false;pintaK();
+  try{await document.documentElement.requestFullscreen({navigationUI:'hide'})}catch(e){}
+  try{await screen.orientation.lock('landscape')}catch(e){}
+  try{wl=await navigator.wakeLock.request('screen')}catch(e){}
+}
+function cerrarKiosk(){
+  $('#kiosk').hidden=true;
+  try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+  try{screen.orientation.unlock()}catch(e){}
+  try{if(wl){wl.release();wl=null}}catch(e){}
+}
 function decir(t){if(!t||!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';speechSynthesis.speak(u)}
 function evento(s){
   if(s==='SPACE'){if(text&&!text.endsWith(' ')){const w=text.trim().split(' ').pop();text+=' ';if($('#auto').checked)decir(w)}}
@@ -273,9 +313,11 @@ addEventListener('keydown',e=>{
   const k=e.key;
   if(/^[a-z0-9]$/i.test(k))evento(k.toUpperCase());
   else if(k===' '){e.preventDefault();evento('SPACE')}
-  else if(k==='Escape')evento('RESET');
+  else if(k==='Escape'){if(!$('#kiosk').hidden)cerrarKiosk();else evento('RESET')}
   else if(k==='Backspace'){text=text.slice(0,-1);render()}
 });
+$('#fs').onclick=abrirKiosk;$('#kx').onclick=cerrarKiosk;
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!$('#kiosk').hidden)cerrarKiosk()});
 setConn(false);grid();render();tab('t');
 </script>
 </body>
