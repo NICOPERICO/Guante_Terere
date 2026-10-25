@@ -7,31 +7,35 @@
 <title>Guante Tereré</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-:root{--bg:#eef1f7;--fg:#101828;--card:#fff;--mut:#5b6577;--bd:#d8dde6;--acc:#2547d0;--accf:#fff;--amb:#c77d00;--ok:#127a4f;--scr:#e8edf9;--scrf:#0b1226;--sh:0 10px 28px -18px rgba(16,24,40,.35);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#eef1f7;--fg:#101828;--card:#fff;--mut:#5b6577;--bd:#d8dde6;--acc:#2547d0;--accf:#fff;--amb:#c77d00;--ok:#127a4f;--scr:#e8edf9;--scrf:#0b1226;--sh:0 10px 28px -18px rgba(16,24,40,.35);--fs:17px;--r:14px;--rc:20px;--ff:"Atkinson Hyperlegible",system-ui,sans-serif;--ts:1;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--scrf:#f3f6ff;--sh:0 10px 28px -18px #000}}
 :root[data-theme="dark"]{--bg:#0a0f1c;--fg:#eef1f7;--card:#151c2f;--mut:#9aa5bb;--bd:#2b3552;--acc:#7b97ff;--accf:#0a0f1c;--amb:#f2b43d;--ok:#4cd39a;--scr:#050913;--scrf:#f3f6ff;--sh:0 10px 28px -18px #000}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.5 "Atkinson Hyperlegible",system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--fs)/1.5 var(--ff)}
 .wrap{max-width:660px;margin:0 auto;padding:18px 16px 48px}
-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-h1{font-size:1.45rem;line-height:1.1;margin:0;flex:1;display:flex;align-items:center;gap:10px;letter-spacing:-.01em}
-.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:var(--acc);font-size:1.4rem}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:-18px -16px 14px;padding:14px 16px;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+h1{font-size:1.3rem;line-height:1.1;margin:0;letter-spacing:-.01em}
+.logo{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:var(--r);background:var(--acc);font-size:1.5rem;box-shadow:0 8px 18px -10px var(--acc)}
+.brand{display:flex;align-items:center;gap:12px;flex:1 1 220px;min-width:0}
+.sub{display:block;font-size:.8rem;color:var(--mut);margin-top:2px}
+.hact{display:flex;align-items:center;gap:8px;margin-left:auto}
 .pill{font-size:.85rem;padding:5px 12px;border-radius:99px;border:1.5px solid var(--bd);background:var(--card);color:var(--mut);white-space:nowrap}
 .pill::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mut);margin-right:7px}
 .pill.on{border-color:var(--ok);color:var(--ok)}
-.pill.on::before{background:var(--ok);box-shadow:0 0 0 3px rgba(18,122,79,.2)}
-button{font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--bd);border-radius:14px;padding:10px 16px;cursor:pointer;min-height:46px;transition:border-color .15s,background .15s,transform .1s}
+.pill.on::before{background:var(--ok);box-shadow:0 0 0 3px rgba(18,122,79,.2);animation:pulso 2s ease-in-out infinite}
+@keyframes pulso{50%{box-shadow:0 0 0 7px rgba(18,122,79,0)}}
+button{font:inherit;color:inherit;background:var(--card);border:1.5px solid var(--bd);border-radius:var(--r);padding:10px 16px;cursor:pointer;min-height:46px;transition:border-color .15s,background .15s,transform .1s}
 button:hover:not(:disabled){border-color:var(--acc)}
 button:active:not(:disabled){transform:translateY(1px)}
 button:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 button:disabled{opacity:.45;cursor:not-allowed}
 .pri{background:var(--acc);border-color:var(--acc);color:var(--accf);font-weight:700}
 .pri:hover:not(:disabled){filter:brightness(1.1)}
-.tabs{position:relative;display:flex;gap:4px;margin-bottom:16px;padding:4px;background:var(--card);border:1.5px solid var(--bd);border-radius:18px}
-.tabs .ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 6px);background:var(--acc);border-radius:14px;transition:transform .35s cubic-bezier(.4,0,.2,1)}
-.tabs.e .ind{transform:translateX(calc(100% + 4px))}
-.tabs button{position:relative;z-index:1;flex:1;border:0;background:transparent;border-radius:14px;font-weight:700;color:var(--mut);transition:color .3s}
+.tabs{position:relative;display:flex;gap:4px;margin-bottom:16px;padding:4px;background:var(--card);border:1.5px solid var(--bd);border-radius:calc(var(--r) + 4px)}
+.tabs .ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 20px)/4);background:var(--acc);border-radius:var(--r);transform:translateX(calc(var(--i,0)*(100% + 4px)));transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.tabs button{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:7px 2px;min-height:54px;border:0;background:transparent;border-radius:var(--r);font-weight:700;font-size:.78rem;line-height:1.1;color:var(--mut);transition:color .3s}
+.tabs .ti{font-size:1.2rem;line-height:1}
 .tabs button.on{color:var(--accf)}
 .views{overflow:hidden;margin:-6px -10px -22px;transition:height .35s cubic-bezier(.4,0,.2,1)}
 .track{display:flex;align-items:flex-start;transition:transform .35s cubic-bezier(.4,0,.2,1)}
@@ -52,11 +56,11 @@ dialog h2{font-size:1.3rem;margin:0 0 6px}
 .spin{width:46px;height:46px;margin:6px auto 14px;border:4px solid var(--bd);border-top-color:var(--acc);border-radius:50%;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 dialog .row{margin-top:14px}
-.card{background:var(--card);border:1.5px solid var(--bd);border-radius:20px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+.card{background:var(--card);border:1.5px solid var(--bd);border-radius:var(--rc);padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
 #pt>.card:first-child{background:var(--scr);border-color:var(--bd);padding:20px 18px}
-.txt{color:var(--scrf);font-size:clamp(2.1rem,10vw,3.2rem);font-weight:700;letter-spacing:.05em;line-height:1.15;min-height:3.5em;word-break:break-word;white-space:pre-wrap}
+.txt{color:var(--scrf);font-size:calc(clamp(2.1rem,10vw,3.2rem)*var(--ts));font-weight:700;letter-spacing:.05em;line-height:1.15;min-height:3.5em;word-break:break-word;white-space:pre-wrap}
 .txt::after{content:"";display:inline-block;width:.09em;height:.85em;margin-left:.08em;background:var(--amb);vertical-align:-.05em;animation:bl 1.1s steps(1) infinite}
-.txt[data-e]::before{content:"Haz una seña…";color:var(--mut);font-weight:400;letter-spacing:0;font-size:.55em}
+.txt[data-e]::before{content:"Haz una seña…";color:var(--scm,var(--mut));font-weight:400;letter-spacing:0;font-size:.55em}
 @keyframes bl{50%{opacity:0}}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .row>*{flex:1 1 auto}
@@ -68,11 +72,20 @@ dialog .row{margin-top:14px}
 .ring .fg{stroke:var(--amb);stroke-linecap:round;stroke-dasharray:276.5;stroke-dashoffset:276.5;transition:stroke-dashoffset .12s linear}
 .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:2rem}
 .small{font-size:.9rem;color:var(--mut)}
+.in{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--bd);border-radius:var(--r);background:var(--bg);color:var(--fg);margin:6px 0 10px}
+.in:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.gl{justify-content:space-between}
+.g{border:1.5px solid var(--bd);border-radius:calc(var(--r) + 2px);padding:12px;margin-bottom:10px}
+.gh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.gh b{font-size:1.1rem;word-break:break-word}
+.bd{font-size:.8rem;padding:3px 10px;border-radius:99px;border:1.5px solid var(--amb);color:var(--amb);white-space:nowrap}
+.bd.ok{border-color:var(--ok);color:var(--ok)}
+.g .row button{flex:1 1 calc(50% - 4px);min-height:42px;font-size:.9rem;padding:6px 10px}
 label.sw{display:flex;gap:10px;align-items:center;margin:14px 0 6px;font-size:.95rem}
 input[type=checkbox]{width:22px;height:22px;accent-color:var(--acc)}
 h2{font-size:1.1rem;margin:0 0 10px}
 .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:6px}
-.k{position:relative;padding:8px 0;min-height:48px;font-weight:700;border-radius:12px}
+.k{position:relative;padding:8px 0;min-height:48px;font-weight:700;border-radius:calc(var(--r) - 2px)}
 .k.sp{grid-column:span 3;font-size:.8rem}
 .k.on{border-color:var(--acc);background:var(--acc);color:var(--accf)}
 .k i{position:absolute;top:3px;right:5px;font:normal 700 .65rem/1 inherit;color:var(--mut)}
@@ -81,37 +94,75 @@ h2{font-size:1.1rem;margin:0 0 10px}
 .lr{display:grid;grid-template-columns:72px 1fr 36px;gap:10px;align-items:center;font-size:.85rem;margin:6px 0}
 .bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}
 .bar i{display:block;height:100%;width:0;background:var(--acc);border-radius:6px;transition:width .1s linear}
-#msg{z-index:60;position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:636px;margin:auto;background:var(--fg);color:var(--bg);padding:13px 16px;border-radius:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
+#msg{z-index:60;position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:636px;margin:auto;background:var(--fg);color:var(--bg);padding:13px 16px;border-radius:var(--r);box-shadow:0 12px 30px -10px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .2s}
 #msg.show{opacity:1}
 .tools{display:flex;gap:8px;margin:-4px 0 14px}
 .tools button{flex:1;min-height:42px;font-size:.9rem;padding:6px 10px}
 #kiosk{position:fixed;inset:0;z-index:50;background:var(--scr);color:var(--scrf);display:flex;align-items:center;justify-content:center;padding:max(20px,env(safe-area-inset-top),env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left),env(safe-area-inset-right))}
 #kiosk[hidden]{display:none}
 #ktxt{font-weight:700;letter-spacing:.05em;line-height:1.1;text-align:center;word-break:break-word;white-space:pre-wrap;max-width:100%}
-#ktxt:empty::before{content:"Haz una seña…";font-weight:400;letter-spacing:0;color:var(--mut)}
+#ktxt:empty::before{content:"Haz una seña…";font-weight:400;letter-spacing:0;color:var(--scm,var(--mut))}
 #kx{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:calc(12px + env(safe-area-inset-right,0px));min-height:40px;padding:6px 14px;background:var(--card);color:var(--fg);border-color:var(--bd);opacity:.85}
 #kiosk .rot{display:none;position:absolute;left:0;right:0;text-align:center;bottom:calc(16px + env(safe-area-inset-bottom,0px));font-size:.9rem;color:var(--mut)}
 @media (orientation:portrait){#kiosk .rot{display:block}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}.txt::after,.spin,dialog[open]{animation:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.txt::after,.spin,dialog[open],.pill.on::before{animation:none}}
+
+.aviso{display:flex;gap:10px;align-items:center;margin-bottom:14px;padding:10px 14px;background:var(--card);border:1.5px dashed var(--bd);border-radius:var(--rc);font-size:.92rem;color:var(--mut)}
+.aviso[hidden]{display:none}
+.chd{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;color:var(--scm,var(--mut));font-size:.85rem;font-weight:700}
+.mini{min-height:34px;padding:3px 12px;font-size:.85rem;background:transparent;color:var(--scrf);border-color:var(--scm,var(--bd))}
+.gt{grid-column:1/-1;margin:10px 0 0;font-size:.82rem;font-weight:700;color:var(--mut)}
+.gt:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.chips button{min-height:34px;padding:2px 12px;font-size:.88rem;border-radius:99px}
+.opt{display:block;margin:18px 0 8px;font-weight:700;font-size:.95rem}
+.opt:first-of-type{margin-top:6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{flex:1 1 auto;min-height:42px;padding:6px 12px;font-size:.92rem}
+.seg button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--accf);font-weight:700}
+.sws{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sw-c{width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;border:3px solid var(--card);box-shadow:0 0 0 1.5px var(--bd)}
+.sw-c.sel{box-shadow:0 0 0 3px var(--fg)}
+.sw-c.cust{position:relative;overflow:hidden;cursor:pointer;background:conic-gradient(#e24b4a,#fac775,#97c459,#5dcaa5,#378add,#7f77dd,#e24b4a)}
+.sw-c.cust input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;padding:0}
+.sw-p{min-width:62px;min-height:44px;padding:4px 12px;font-weight:700;border:2px solid var(--bd)}
+.sw-p.sel{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc)}
+.prev{background:var(--scr);border:1.5px solid var(--bd);border-radius:var(--r);padding:14px 16px;margin:4px 0 6px}
+.prev .txt{min-height:0;font-size:calc(1.7rem*var(--ts))}
+input[type=range]{width:100%;accent-color:var(--acc);min-height:30px}
+.rg{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;margin:12px 0}
+.rg label{font-size:.95rem;font-weight:700}
+.rg output{font-variant-numeric:tabular-nums;color:var(--mut);font-size:.9rem}
+.rg input{grid-column:1/-1}
+select.in{appearance:auto}
+html[data-caso="upper"] .txt,html[data-caso="upper"] #ktxt{text-transform:uppercase}
+html[data-caso="lower"] .txt,html[data-caso="lower"] #ktxt{text-transform:lowercase}
+html[data-caso="oracion"] .txt,html[data-caso="oracion"] #ktxt{text-transform:lowercase}
+html[data-caso="oracion"] .txt::first-letter,html[data-caso="oracion"] #ktxt::first-letter{text-transform:uppercase}
+html[data-cursor="0"] .txt::after{display:none}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><h1><span class="logo">🧤</span>Guante Tereré</h1><span id="st" class="pill">Desconectado</span><button id="bc" class="pri">Conectar</button></header>
-<div class="tools"><button id="theme">🌓 Tema: Auto</button><button id="fs">📺 Modo letras</button></div>
-<div class="tabs" id="tabs" role="tablist"><i class="ind"></i><button data-t="t" class="on" role="tab" aria-selected="true">Traducir</button><button data-t="e" role="tab" aria-selected="false">Entrenar</button></div>
+<header>
+  <div class="brand"><span class="logo">🧤</span><div><h1>Guante Tereré</h1><span class="sub">Traductor de lenguaje de señas</span></div></div>
+  <div class="hact"><span id="st" class="pill">Desconectado</span><button id="bc" class="pri">Conectar</button></div>
+</header>
+<div id="aviso" class="aviso"><span aria-hidden="true">🔌</span><span>Conecta tu guante para empezar. Sin guante puedes probar con el teclado.</span></div>
+<div class="tabs" id="tabs" role="tablist"><i class="ind"></i><button data-t="t" class="on" role="tab" aria-selected="true"><span class="ti" aria-hidden="true">💬</span>Traducir</button><button data-t="e" role="tab" aria-selected="false"><span class="ti" aria-hidden="true">🎯</span>Entrenar</button><button data-t="g" role="tab" aria-selected="false"><span class="ti" aria-hidden="true">✋</span>Mis gestos</button><button data-t="a" role="tab" aria-selected="false"><span class="ti" aria-hidden="true">⚙️</span>Ajustes</button></div>
 <div class="views" id="views"><div class="track" id="track">
 
 <section id="pt">
-  <div class="card"><div id="txt" class="txt" data-e="1" aria-live="polite"></div></div>
+  <div class="card"><div class="chd"><span>Traducción</span><button id="fs" class="mini">📺 Modo letras</button></div><div id="txt" class="txt" data-e="1" aria-live="polite"></div></div>
   <div class="card det">
     <div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="44"/><circle class="fg" id="prog" cx="50" cy="50" r="44"/></svg><b id="det">–</b></div>
     <div><div><b>Detectando</b></div><div class="small">Mantén la seña un momento para escribirla. Para repetir una letra, cambia de seña y vuelve.</div></div>
   </div>
   <div class="row">
-    <button id="say">Hablar todo</button><button id="back">Borrar última</button><button id="clr">Limpiar</button>
+    <button id="say" class="pri">🔊 Hablar todo</button><button id="copy">Copiar</button><button id="back">Borrar última</button><button id="clr">Limpiar</button>
   </div>
-  <label class="sw"><input type="checkbox" id="auto" checked> Decir cada palabra al terminarla</label>
+  <label class="sw"><input type="checkbox" data-aj="autoPal"> Decir cada palabra al terminarla</label>
+  <label class="sw"><input type="checkbox" data-aj="autoGest"> Decir en voz alta cada gesto que hago</label>
   <p class="small">Sin guante puedes probar con el teclado: letras, números, espacio, Retroceso y Esc.</p>
 </section>
 
@@ -130,6 +181,77 @@ h2{font-size:1.1rem;margin:0 0 10px}
     <button id="all">Borrar todas las señas</button>
   </div>
   <div class="card"><h2>Lecturas en vivo</h2><div id="live"></div></div>
+</section>
+
+<section id="pg">
+  <div class="card">
+    <h2>Crear un gesto nuevo</h2>
+    <p class="small">Escribe la palabra o frase que quieres que aparezca cuando hagas el gesto, por ejemplo «Hola» o «Gracias». Después le enseñas el movimiento.</p>
+    <input id="gname" class="in" type="text" maxlength="40" placeholder="Nombre del gesto" autocomplete="off" autocapitalize="sentences" aria-label="Nombre del gesto">
+    <div class="chips" id="chips" aria-label="Ideas de nombres"></div>
+    <div class="row gl"><span id="gcnt" class="small">0/14 bytes</span><button id="gnew" class="pri">Crear gesto</button></div>
+    <p class="small">Máximo 14 bytes: unas 14 letras; las tildes y la ñ cuentan doble.</p>
+  </div>
+  <div class="card">
+    <h2>Mis gestos</h2>
+    <p id="gempty" class="small">Todavía no creaste ninguno. Conecta el guante y crea el primero arriba.</p>
+    <div id="glist"></div>
+    <p id="gstat" class="small" role="status"></p>
+  </div>
+  <div class="card">
+    <h2>Cómo enseñar un gesto</h2>
+    <p class="small">1. Forma la postura de dedos con la que haces el gesto (por ejemplo, mano abierta para saludar).<br>2. Pulsa <b>Grabar muestra</b> y, cuando diga «Haz el gesto ahora», haz el movimiento. Tienes 6 segundos.<br>3. Repite 4 o 5 veces, siempre igual.<br>4. Listo: ya no hay que pulsar nada. Cuando hagas el gesto, la palabra aparece sola en <b>Traducir</b>.</p>
+    <p class="small">Consejos: el guante detecta el giro de la mano y la muñeca, así que mueve la mano y no solo el brazo. Haz gestos distintos entre sí, y si dos se confunden, cambia la postura de los dedos en uno de ellos.</p>
+  </div>
+</section>
+
+<section id="pa">
+  <div class="card">
+    <h2>Apariencia</h2>
+    <span class="opt">Tema</span>
+    <div class="seg" data-aj="tema"><button data-v="auto">🌓 Auto</button><button data-v="light">☀️ Claro</button><button data-v="dark">🌙 Oscuro</button></div>
+    <span class="opt">Color principal</span>
+    <div class="sws" id="swAcc"></div>
+    <span class="opt">Tamaño de la interfaz</span>
+    <div class="seg" data-aj="interfaz"><button data-v="0">Normal</button><button data-v="1">Grande</button><button data-v="2">Muy grande</button></div>
+    <span class="opt">Esquinas</span>
+    <div class="seg" data-aj="esq"><button data-v="redondas">Redondas</button><button data-v="suaves">Suaves</button><button data-v="rectas">Rectas</button></div>
+    <span class="opt">Tipo de letra</span>
+    <div class="seg" data-aj="fuente"><button data-v="legible">Legible</button><button data-v="sistema">Sistema</button><button data-v="serif">Con serifa</button><button data-v="mono">Monoespaciada</button></div>
+  </div>
+  <div class="card">
+    <h2>Pantalla de texto</h2>
+    <div class="prev"><div class="txt">Hola, ¿cómo estás?</div></div>
+    <span class="opt">Colores de la pantalla</span>
+    <div class="sws" id="swScr"></div>
+    <div class="rg"><label for="r-tam">Tamaño de las letras</label><output data-out="tam"></output><input id="r-tam" type="range" min="60" max="180" step="10" data-aj="tam"></div>
+    <span class="opt">Mayúsculas y minúsculas</span>
+    <div class="seg" data-aj="caso"><button data-v="none">Como llega</button><button data-v="upper">MAYÚSCULAS</button><button data-v="lower">minúsculas</button><button data-v="oracion">Oración</button></div>
+    <label class="sw"><input type="checkbox" data-aj="cursor"> Mostrar el cursor parpadeante</label>
+  </div>
+  <div class="card">
+    <h2>Voz</h2>
+    <label class="opt" for="vozSel">Voz</label>
+    <select id="vozSel" class="in" data-aj="voz"></select>
+    <div class="rg"><label for="r-vel">Velocidad</label><output data-out="vel"></output><input id="r-vel" type="range" min="0.6" max="1.6" step="0.05" data-aj="vel"></div>
+    <div class="rg"><label for="r-tono">Tono</label><output data-out="tono"></output><input id="r-tono" type="range" min="0.6" max="1.6" step="0.05" data-aj="tono"></div>
+    <div class="rg"><label for="r-vol">Volumen</label><output data-out="vol"></output><input id="r-vol" type="range" min="0" max="1" step="0.05" data-aj="vol"></div>
+    <div class="row"><button id="probarVoz">🔊 Probar voz</button></div>
+    <label class="sw"><input type="checkbox" data-aj="autoPal"> Decir cada palabra al terminarla</label>
+    <label class="sw"><input type="checkbox" data-aj="autoGest"> Decir en voz alta cada gesto que hago</label>
+    <label class="sw"><input type="checkbox" data-aj="avCon"> Decir una frase al conectar el guante</label>
+    <label class="opt" for="fraseCon">Frase al conectar</label>
+    <input id="fraseCon" class="in" type="text" maxlength="40" data-aj="fraseCon" placeholder="Conectado" autocomplete="off">
+    <label class="sw"><input type="checkbox" data-aj="avDesc"> Decir «Desconectado» si se pierde la conexión</label>
+    <p class="small">Si tu teléfono tiene voces de Google en español latino, aparecen en la lista. Puedes instalar más en los ajustes de texto a voz de Android.</p>
+  </div>
+  <div class="card">
+    <h2>Comportamiento</h2>
+    <label class="sw"><input type="checkbox" data-aj="vibra"> Vibrar al reconocer una seña</label>
+    <label class="sw"><input type="checkbox" data-aj="wake"> Mantener la pantalla encendida mientras esté conectado</label>
+    <p class="small">Tus ajustes se guardan en este navegador.</p>
+    <button id="reset">Restablecer ajustes</button>
+  </div>
 </section>
 </div></div>
 </div>
@@ -173,19 +295,105 @@ h2{font-size:1.1rem;margin:0 0 10px}
 
 <script>
 const SVC='7a1c0001-5b3e-4c8a-9d2f-6a7b8c9d0e01',U=n=>'7a1c000'+n+'-5b3e-4c8a-9d2f-6a7b8c9d0e01';
-const SYM=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789','ESPACIO','REINICIAR'];
-const HINT={36:'Sugerencia: puño cerrado con el pulgar hacia arriba.',37:'Sugerencia: mano abierta con la palma hacia arriba (el acelerómetro lo distingue de las letras).'};
+const SYM=[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789','ESPACIO','REINICIAR','Ñ'];
+const HINT={36:'Sugerencia: puño cerrado con el pulgar hacia arriba.',37:'Sugerencia: mano abierta con la palma hacia arriba (el acelerómetro lo distingue de las letras).',
+  9:'Seña con movimiento: forma la I, pulsa Grabar y cuando diga HAZ EL GESTO YA, dibuja la J girando la muñeca.',25:'Seña con movimiento: forma el 1 (índice arriba), pulsa Grabar y cuando diga HAZ EL GESTO YA, dibuja la Z girando la muñeca.',38:'Seña con movimiento: forma la N, pulsa Grabar y cuando diga HAZ EL GESTO YA, haz el movimiento de la Ñ. Graba 4 o 5 veces igual.'};
 const $=s=>document.querySelector(s);
-const TH=['auto','light','dark'],TL={auto:'🌓 Tema: Auto',light:'☀️ Tema: Claro',dark:'🌙 Tema: Oscuro'};
-let th='auto';try{th=localStorage.getItem('tema')||'auto'}catch(e){}
-if(!TL[th])th='auto';
-function aplicaTema(){
-  if(th==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',th);
-  $('#theme').textContent=TL[th]
+// ---------- Ajustes de personalización ----------
+const K_AJ='guante_ajustes';
+const ACC={azul:{n:'Azul',l:'#2547d0',d:'#7b97ff'},verde:{n:'Verde',l:'#0f7a55',d:'#4cd39a'},violeta:{n:'Violeta',l:'#6a3fd1',d:'#b49cff'},rosa:{n:'Rosa',l:'#c2255c',d:'#ff8fb5'},naranja:{n:'Naranja',l:'#b85400',d:'#ffb25c'},turquesa:{n:'Turquesa',l:'#0a7d8c',d:'#5fd8e6'}};
+const PANT={noche:{n:'Noche',bg:'#050913',fg:'#f3f6ff',m:'#9aa5bb'},dia:{n:'Día',bg:'#ffffff',fg:'#101828',m:'#5b6577'},contraste:{n:'Alto contraste',bg:'#000000',fg:'#ffe600',m:'#bfb34a'},verde:{n:'Verde',bg:'#04110a',fg:'#5dff9a',m:'#4fa879'},papel:{n:'Papel',bg:'#f5ecd7',fg:'#3a2f1a',m:'#7a6a4a'},azul:{n:'Azul',bg:'#0d2a6b',fg:'#ffffff',m:'#a9bce6'}};
+const ESQ={redondas:[14,20],suaves:[8,12],rectas:[2,4]};
+const FUENTES={legible:'"Atkinson Hyperlegible",system-ui,sans-serif',sistema:'system-ui,-apple-system,"Segoe UI",Roboto,sans-serif',serif:'Georgia,"Times New Roman",serif',mono:'ui-monospace,"SF Mono",Menlo,Consolas,monospace'};
+const DEF={tema:'auto',acc:'azul',accC:'#2547d0',interfaz:0,esq:'redondas',fuente:'legible',pantalla:'auto',tam:100,caso:'none',cursor:true,voz:'',vel:1,tono:1,vol:1,avCon:true,fraseCon:'Conectado',avDesc:false,autoPal:true,autoGest:true,vibra:true,wake:true};
+const OK={tema:v=>['auto','light','dark'].includes(v),acc:v=>v==='custom'||v in ACC,accC:v=>/^#[0-9a-f]{6}$/i.test(v),interfaz:v=>[0,1,2].includes(v),esq:v=>v in ESQ,fuente:v=>v in FUENTES,pantalla:v=>v==='auto'||v in PANT,tam:v=>v>=60&&v<=180,caso:v=>['none','upper','lower','oracion'].includes(v),vel:v=>v>=.5&&v<=2,tono:v=>v>=.5&&v<=2,vol:v=>v>=0&&v<=1,fraseCon:v=>v.length<=40};
+const NUM=new Set(['interfaz']);
+const SAL={tam:v=>v+'%',vel:v=>(+v).toFixed(2)+'×',tono:v=>(+v).toFixed(2),vol:v=>Math.round(v*100)+'%'};
+let AJ={...DEF};
+(function(){
+  try{
+    const g=JSON.parse(localStorage.getItem(K_AJ)||'null');
+    if(g&&typeof g==='object'){for(const k in DEF)if(k in g&&typeof g[k]===typeof DEF[k]&&(!OK[k]||OK[k](g[k])))AJ[k]=g[k]}
+    else{const t=localStorage.getItem('tema');if(['auto','light','dark'].includes(t))AJ.tema=t}
+  }catch(e){}
+})();
+function guardar(){try{localStorage.setItem(K_AJ,JSON.stringify(AJ))}catch(e){}}
+function oscuro(){return AJ.tema==='dark'||(AJ.tema==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches)}
+function lum(h){const n=parseInt(h.slice(1),16),f=c=>{c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)};return .2126*f(n>>16)+.7152*f((n>>8)&255)+.0722*f(n&255)}
+function aplicar(){
+  const r=document.documentElement,A=AJ;
+  if(A.tema==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',A.tema);
+  const dk=oscuro();let c,f;
+  if(A.acc==='custom'){c=A.accC;f=lum(c)>.179?'#101828':'#ffffff'}
+  else{const q=ACC[A.acc]||ACC.azul;c=dk?q.d:q.l;f=dk?'#0a0f1c':'#ffffff'}
+  r.style.setProperty('--acc',c);r.style.setProperty('--accf',f);
+  r.style.setProperty('--fs',[17,19,22][A.interfaz]+'px');
+  r.style.setProperty('--r',ESQ[A.esq][0]+'px');r.style.setProperty('--rc',ESQ[A.esq][1]+'px');
+  r.style.setProperty('--ff',FUENTES[A.fuente]);
+  r.style.setProperty('--ts',A.tam/100);
+  const S=PANT[A.pantalla];
+  if(S){r.style.setProperty('--scr',S.bg);r.style.setProperty('--scrf',S.fg);r.style.setProperty('--scm',S.m)}
+  else['--scr','--scrf','--scm'].forEach(q=>r.style.removeProperty(q));
+  r.dataset.caso=A.caso;r.dataset.cursor=A.cursor?'1':'0';
+  sincronizar();despierto(conn);
+  if(!$('#kiosk').hidden)pintaK()
 }
-$('#theme').onclick=()=>{th=TH[(TH.indexOf(th)+1)%3];try{localStorage.setItem('tema',th)}catch(e){}aplicaTema()};
-aplicaTema();
-let dev,chCmd,text='',sel=0,counts=Array(38).fill(0),conn=false,manual=false,tries=0,tm;
+function sincronizar(){
+  document.querySelectorAll('[data-aj]').forEach(el=>{
+    const k=el.dataset.aj,v=AJ[k];
+    if(el.classList.contains('seg'))el.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===String(v))));
+    else if(el.type==='checkbox'){if(el.checked!==!!v)el.checked=!!v}
+    else if(String(el.value)!==String(v))el.value=v
+  });
+  document.querySelectorAll('[data-out]').forEach(o=>{o.textContent=SAL[o.dataset.out](AJ[o.dataset.out])});
+  document.querySelectorAll('#swAcc [data-v]').forEach(b=>b.classList.toggle('sel',AJ.acc===b.dataset.v));
+  const cu=$('#swAcc .cust');if(cu){cu.classList.toggle('sel',AJ.acc==='custom');$('#accC').value=AJ.accC}
+  document.querySelectorAll('#swScr [data-v]').forEach(b=>b.classList.toggle('sel',AJ.pantalla===b.dataset.v))
+}
+function fijar(k,v){AJ[k]=v;guardar();aplicar()}
+function enlazar(){
+  document.querySelectorAll('[data-aj]').forEach(el=>{
+    const k=el.dataset.aj;
+    if(el.classList.contains('seg'))el.querySelectorAll('button').forEach(b=>b.onclick=()=>fijar(k,NUM.has(k)?+b.dataset.v:b.dataset.v));
+    else if(el.type==='checkbox')el.onchange=()=>fijar(k,el.checked);
+    else if(el.type==='range')el.oninput=()=>fijar(k,+el.value);
+    else{el.oninput=()=>fijar(k,el.value);el.onchange=()=>fijar(k,el.value)}
+  })
+}
+function construirUI(){
+  const A=$('#swAcc');
+  Object.entries(ACC).forEach(([k,q])=>{const b=document.createElement('button');b.className='sw-c';b.dataset.v=k;b.title=q.n;b.setAttribute('aria-label','Color '+q.n);b.style.background=q.l;b.onclick=()=>fijar('acc',k);A.append(b)});
+  const cu=document.createElement('label');cu.className='sw-c cust';cu.title='Otro color';
+  cu.innerHTML='<input type="color" id="accC" aria-label="Elegir otro color">';A.append(cu);
+  $('#accC').oninput=e=>{AJ.accC=e.target.value;AJ.acc='custom';guardar();aplicar()};
+  const P=$('#swScr');
+  const au=document.createElement('button');au.className='sw-p';au.dataset.v='auto';au.textContent='Auto';au.title='Sigue el tema';au.onclick=()=>fijar('pantalla','auto');P.append(au);
+  Object.entries(PANT).forEach(([k,q])=>{const b=document.createElement('button');b.className='sw-p';b.dataset.v=k;b.textContent='Aa';b.title=q.n;b.setAttribute('aria-label','Pantalla '+q.n);b.style.background=q.bg;b.style.color=q.fg;b.onclick=()=>fijar('pantalla',k);P.append(b)});
+  ['Hola','Gracias','Por favor','Sí','No','Adiós','Ayuda','Te quiero','Buenos días'].forEach(t=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{$('#gname').value=t;chkNombre()};$('#chips').append(b)});
+  $('#probarVoz').onclick=()=>decir('Hola, así suena mi voz');
+  $('#reset').onclick=()=>{if(confirm('¿Restablecer todos los ajustes de la interfaz?')){AJ={...DEF};guardar();aplicar();poblarVoces()}}
+}
+function poblarVoces(){
+  const sl=$('#vozSel');if(!sl||!window.speechSynthesis)return;
+  let vs=[];try{vs=speechSynthesis.getVoices()}catch(e){}
+  const es=vs.filter(v=>/^es[-_]/i.test(v.lang));
+  es.sort((a,b)=>(/^es[-_]ES/i.test(a.lang)?1:0)-(/^es[-_]ES/i.test(b.lang)?1:0)||a.name.localeCompare(b.name));
+  sl.textContent='';
+  const o0=document.createElement('option');o0.value='';o0.textContent='Automática (español latino)';sl.append(o0);
+  es.forEach(v=>{const o=document.createElement('option');o.value=v.voiceURI||v.name;o.textContent=v.name+' ('+v.lang+')';sl.append(o)});
+  sl.value=AJ.voz;if(sl.value!==AJ.voz)sl.value=''
+}
+function vib(p){if(AJ.vibra&&navigator.vibrate)navigator.vibrate(p)}
+let wlc=null;
+async function despierto(on){
+  try{
+    if(on&&AJ.wake&&!wlc&&navigator.wakeLock){wlc=await navigator.wakeLock.request('screen');wlc.addEventListener('release',()=>{wlc=null})}
+    else if((!on||!AJ.wake)&&wlc){const w=wlc;wlc=null;await w.release()}
+  }catch(e){wlc=null}
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')despierto(conn)});
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{if(AJ.tema==='auto'||AJ.acc!=='custom')aplicar()})}catch(e){}
+let dev,chCmd,text='',sel=0,counts=Array(96).fill(0),gest={},conn=false,manual=false,tries=0,tm;
 const enc=new TextEncoder(),dec=new TextDecoder();
 
 function msg(t){const m=$('#msg');m.textContent=t;m.classList.add('show');clearTimeout(tm);tm=setTimeout(()=>m.classList.remove('show'),3500)}
@@ -193,7 +401,7 @@ function render(){const e=$('#txt');e.textContent=text;text?e.removeAttribute('d
 let wl=null;
 function pintaK(){
   const t=text.length>80?'…'+text.slice(-80):text,n=t.length,k=$('#ktxt');
-  k.textContent=t;k.style.fontSize=(n===0?6:n<=6?30:n<=14?20:n<=30?12:7)+'vh'
+  k.textContent=t;k.style.fontSize=Math.min(48,(n===0?6:n<=6?30:n<=14?20:n<=30?12:7)*AJ.tam/100)+'vh'
 }
 async function abrirKiosk(){
   $('#kiosk').hidden=false;pintaK();
@@ -207,29 +415,71 @@ function cerrarKiosk(){
   try{screen.orientation.unlock()}catch(e){}
   try{if(wl){wl.release();wl=null}}catch(e){}
 }
-function decir(t){if(!t||!window.speechSynthesis)return;const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';speechSynthesis.speak(u)}
+// Voz en español latino: se prefiere una voz de Google de América (es-419, es-US, es-MX...) y nunca la de España.
+const LAT=['es-419','es-US','es-MX','es-AR','es-CO','es-CL','es-PE','es-VE','es-BO'];
+function vozLatina(){
+  let vs=[];try{vs=speechSynthesis.getVoices()}catch(e){}
+  const lat=vs.filter(v=>/^es[-_]/i.test(v.lang)&&!/^es[-_]ES/i.test(v.lang));
+  const norm=v=>v.lang.replace('_','-').toLowerCase();
+  for(const l of LAT){const m=lat.filter(v=>norm(v)===l.toLowerCase());if(m.length)return m.find(v=>/google/i.test(v.name))||m[0]}
+  return lat.find(v=>/google/i.test(v.name))||lat[0]||null
+}
+function vozElegida(){
+  let vs=[];try{vs=speechSynthesis.getVoices()}catch(e){}
+  if(AJ.voz){const v=vs.find(x=>(x.voiceURI||x.name)===AJ.voz);if(v)return v}
+  return vozLatina()
+}
+function decir(t){
+  if(!t||!window.speechSynthesis)return;
+  try{if(speechSynthesis.paused)speechSynthesis.resume()}catch(e){}
+  const u=new SpeechSynthesisUtterance(t),v=vozElegida();
+  if(v){u.voice=v;u.lang=v.lang}else u.lang='es-419';
+  u.rate=AJ.vel;u.pitch=AJ.tono;u.volume=AJ.vol;
+  speechSynthesis.speak(u)
+}
+// Aviso hablado al conectar (y, si se activa, al perder la conexión)
+function avisarConexion(on){
+  if(on&&AJ.avCon)decir(limpio(AJ.fraseCon)||'Conectado');
+  else if(!on&&AJ.avDesc)decir('Desconectado')
+}
+// El navegador solo permite hablar después de que la persona toque la pantalla una vez.
+// Al pulsar «Conectar» (o cualquier botón) se deja la voz lista para que los gestos suenen solos.
+function desbloquearVoz(){
+  if(!window.speechSynthesis)return;
+  try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;u.lang='es-419';speechSynthesis.speak(u)}catch(e){}
+}
+addEventListener('pointerdown',desbloquearVoz,{once:true});
+addEventListener('keydown',desbloquearVoz,{once:true});
 function evento(s){
-  if(s==='SPACE'){if(text&&!text.endsWith(' ')){const w=text.trim().split(' ').pop();text+=' ';if($('#auto').checked)decir(w)}}
+  if(s==='SPACE'){if(text&&!text.endsWith(' ')){const w=text.trim().split(' ').pop();text+=' ';if(AJ.autoPal)decir(w)}}
   else if(s==='RESET'){text=''}
   else text+=s;
-  render();if(navigator.vibrate)navigator.vibrate(40)
+  render();vib(40)
 }
 function setConn(v){conn=v;const s=$('#st');s.textContent=v?'Conectado':'Desconectado';s.classList.toggle('on',v);$('#bc').textContent=v?'Desconectar':'Conectar';
-  ['rec','del','all','cao','caf'].forEach(i=>$('#'+i).disabled=!v)}
+  ['rec','del','all','cao','caf'].forEach(i=>$('#'+i).disabled=!v);$('#aviso').hidden=v;despierto(v);chkNombre();listaG()}
 
 async function cmd(c){if(!chCmd||!conn)return msg('Conecta el guante primero.');try{await chCmd.writeValue(enc.encode(c))}catch(e){msg('No se pudo enviar el comando.')}}
 function onData(e){
   const v=e.target.value,live=document.querySelectorAll('#live .lr');
   for(let i=0;i<8;i++){const x=i<5?v.getUint8(i):v.getInt8(i);live[i].querySelector('i').style.width=(i<5?x:(x+100)/2)+'%';live[i].querySelector('b').textContent=x}
   const c=v.getInt8(8),p=v.getUint8(9);
-  $('#det').textContent=c>=0?(c<36?SYM[c]:(c===36?'␣':'↺')):'–';
+  $('#det').textContent=c>=0?(c<36||c>37?SYM[c]:(c===36?'␣':'↺')):'–';
   $('#prog').style.strokeDashoffset=276.5*(1-(c>=0?p/100:0))
 }
+const INFO={'HAZ EL GESTO YA':'Haz el gesto ahora… (tienes 6 segundos)','MUESTRA OK':'✓ Muestra guardada','SIN MOVIMIENTO':'No detecté movimiento. Pulsa Grabar muestra y vuelve a intentar.','GESTO MUY SUAVE':'El movimiento fue muy suave. Hazlo más fuerte o más rápido.','MPU NO RESPONDE':'El sensor de movimiento no responde. Revisa sus cables.','MEMORIA LLENA':'La memoria de gestos está llena. Elimina alguno.','CREA EL GESTO':'Primero crea el gesto.'};
+function palabra(w){text+=(text&&!text.endsWith(' ')?' ':'')+w+' ';if(AJ.autoGest)decir(w);render();vib([40,40,40])}
 function onEv(e){
-  const s=dec.decode(e.target.value),t=s.slice(2);
-  if(s[0]==='E')evento(t);
-  else if(s[0]==='C'){const[n,k]=t.split(':').map(Number);counts[n]=k;grid()}
-  else{if(t==='BORRADO'){counts.fill(0);grid()}msg(t)}
+  const s=dec.decode(e.target.value),t=s.slice(2),k=s[0];
+  if(k==='E')evento(t);
+  else if(k==='W')palabra(t);
+  else if(k==='C'){const[n,c]=t.split(':').map(Number);counts[n]=c;grid();listaG()}
+  else if(k==='U'){const i=t.indexOf(':');gest[+t.slice(0,i)]={name:t.slice(i+1)};listaG()}
+  else if(k==='X'){const n=+t;delete gest[n];counts[CG+n]=0;listaG()}
+  else{
+    if(t==='BORRADO'){counts.fill(0);gest={};grid();listaG()}
+    msg(INFO[t]||t);if(INFO[t])gst(INFO[t])
+  }
 }
 async function abrir(){
   const srv=await dev.gatt.connect(),svc=await srv.getPrimaryService(SVC);
@@ -237,10 +487,10 @@ async function abrir(){
   const d=await svc.getCharacteristic(U(2)),e=await svc.getCharacteristic(U(3));
   d.addEventListener('characteristicvaluechanged',onData);e.addEventListener('characteristicvaluechanged',onEv);
   await d.startNotifications();await e.startNotifications();
-  setConn(true);tries=0;await cmd('STAT')
+  setConn(true);avisarConexion(true);tries=0;gest={};listaG();await cmd('STAT')
 }
 function reconectar(){if(manual||conn||tries>=3)return;tries++;msg('Reconectando…');setTimeout(()=>abrir().catch(reconectar),1500)}
-function onDesc(){setConn(false);reconectar()}
+function onDesc(){const era=conn;setConn(false);if(era)avisarConexion(false);reconectar()}
 const dlg=$('#dlg');
 function setDlg(st,t){
   dlg.querySelectorAll('.st').forEach(e=>e.hidden=e.dataset.for!==st);
@@ -273,12 +523,13 @@ async function buscar(){
 
 function grid(){
   const g=$('#grid');g.innerHTML='';
-  SYM.forEach((s,i)=>{const b=document.createElement('button');b.className='k'+(i>35?' sp':'')+(i===sel?' on':'')+(counts[i]?' has':'');
-    b.textContent=i===36?'␣ ESPACIO':i===37?'↺ REINICIAR':s;
+  const TIT={0:'Letras',26:'Números',36:'Especiales'};
+  SYM.forEach((s,i)=>{if(i in TIT){const h=document.createElement('p');h.className='gt';h.textContent=TIT[i];g.append(h)}const b=document.createElement('button');b.className='k'+(i>35?' sp':'')+(i===sel?' on':'')+(counts[i]?' has':'');
+    b.textContent=i===36?'␣ ESPACIO':i===37?'↺ REINICIAR':i===38?'Ñ (movimiento)':s;
     if(counts[i]){const n=document.createElement('i');n.textContent=counts[i];b.append(n)}
     b.onclick=()=>{sel=i;grid()};g.append(b)});
   $('#hint').textContent=HINT[sel]||'';
-  $('#rec').textContent='Grabar muestra de '+(sel<36?SYM[sel]:sel===36?'ESPACIO':'REINICIAR')
+  $('#rec').textContent='Grabar muestra de '+(sel<36||sel>37?SYM[sel]:sel===36?'ESPACIO':'REINICIAR')
 }
 const names=['Pulgar','Índice','Medio','Anular','Meñique','Acel X','Acel Y','Acel Z'];
 $('#live').innerHTML=names.map(n=>'<div class="lr"><span>'+n+'</span><div class="bar"><i></i></div><b>0</b></div>').join('');
@@ -288,36 +539,97 @@ dlg.querySelectorAll('.x').forEach(b=>b.onclick=()=>dlg.close());
 $('#say').onclick=()=>decir(text.trim());
 $('#back').onclick=()=>{text=text.slice(0,-1);render()};
 $('#clr').onclick=()=>{text='';render()};
+$('#copy').onclick=async()=>{const t=text.trim();if(!t)return msg('No hay texto para copiar.');try{await navigator.clipboard.writeText(t);msg('Texto copiado.')}catch(e){msg('No se pudo copiar.')}};
 $('#cao').onclick=()=>{msg('Mantén la mano abierta y quieta…');cmd('CALO')};
 $('#caf').onclick=()=>{msg('Mantén el puño cerrado y quieto…');cmd('CALF')};
-$('#rec').onclick=()=>{msg('Grabando… no muevas la mano.');cmd('REC:'+sel)};
+$('#rec').onclick=()=>{msg([9,25,38].includes(sel)?'Mantén la postura y espera el aviso…':'Grabando… no muevas la mano.');cmd('REC:'+sel)};
 $('#del').onclick=()=>cmd('DEL:'+sel);
 $('#all').onclick=()=>{if(confirm('¿Borrar todas las señas guardadas en el guante?')){cmd('CLR');counts.fill(0);grid()}};
+// ---------- Mis gestos ----------
+const CG=64,NG=20,NMAX=14;
+function nb(t){return enc.encode(t).length}
+function limpio(t){return t.replace(/[\u0000-\u001f]/g,'').replace(/\s+/g,' ').trim()}
+function libre(){for(let i=0;i<NG;i++)if(!gest[i])return i;return -1}
+function gst(t){$('#gstat').textContent=t||''}
+function chkNombre(){
+  const n=nb(limpio($('#gname').value)),c=$('#gcnt');
+  c.textContent=n+'/'+NMAX+' bytes';c.style.color=n>NMAX?'var(--amb)':'';
+  $('#gnew').disabled=!conn||n===0||n>NMAX
+}
+$('#gname').addEventListener('input',chkNombre);
+$('#gname').addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('#gnew').disabled)$('#gnew').click()});
+$('#gnew').onclick=()=>{
+  const nom=limpio($('#gname').value);
+  if(!nom||nb(nom)>NMAX)return;
+  if(Object.values(gest).some(g=>g.name.toLowerCase()===nom.toLowerCase()))return msg('Ya tienes un gesto con ese nombre.');
+  const s=libre();if(s<0)return msg('Ya tienes '+NG+' gestos. Elimina alguno para crear otro.');
+  cmd('GN:'+s+':'+nom);$('#gname').value='';chkNombre();
+  gst('Gesto «'+nom+'» creado. Forma la postura de dedos y pulsa Grabar muestra.')
+};
+function listaG(){
+  const L=$('#glist');L.textContent='';
+  const ks=Object.keys(gest).map(Number).sort((a,b)=>a-b);
+  $('#gempty').hidden=ks.length>0;
+  ks.forEach(s=>{
+    const n=counts[CG+s]||0,d=document.createElement('div');d.className='g';
+    const h=document.createElement('div');h.className='gh';
+    const b=document.createElement('b');b.textContent=gest[s].name;
+    const st=document.createElement('span');st.className='bd'+(n>=3?' ok':'');
+    st.textContent=n===0?'Sin muestras':n<3?n+' de 3 muestras':'Listo ✓ ('+n+')';
+    h.append(b,st);
+    const r=document.createElement('div');r.className='row';
+    [['Grabar muestra','rec',1],['Renombrar','ren',0],['Vaciar muestras','clr',0],['Eliminar','del',0]].forEach(([t,a,p])=>{
+      const x=document.createElement('button');x.textContent=t;if(p)x.classList.add('pri');
+      x.disabled=!conn;x.onclick=()=>accionG(a,s);r.append(x)
+    });
+    d.append(h,r);L.append(d)
+  })
+}
+function accionG(a,s){
+  const nom=gest[s]&&gest[s].name;if(!nom)return;
+  if(a==='rec'){gst('Mantén la postura de dedos y espera el aviso…');cmd('REC:'+(CG+s))}
+  else if(a==='clr'){if(confirm('¿Borrar las muestras de «'+nom+'»? El gesto seguirá existiendo.'))cmd('DEL:'+(CG+s))}
+  else if(a==='del'){if(confirm('¿Eliminar el gesto «'+nom+'» con todas sus muestras?'))cmd('GDL:'+s)}
+  else if(a==='ren'){
+    const v=limpio(prompt('Nuevo nombre para «'+nom+'»:',nom)||'');
+    if(!v||v===nom)return;
+    if(nb(v)>NMAX)return msg('El nombre es muy largo (máximo '+NMAX+' bytes).');
+    cmd('GN:'+s+':'+v)
+  }
+}
+
+// ---------- Pestañas ----------
+const TABS=['t','e','g','a'],PAN={t:'#pt',e:'#pe',g:'#pg',a:'#pa'};
 let cur='t';
-function fit(){$('#views').style.height=(cur==='t'?$('#pt'):$('#pe')).offsetHeight+'px'}
+function fit(){$('#views').style.height=$(PAN[cur]).offsetHeight+'px'}
 function tab(t){
-  cur=t;$('#tabs').classList.toggle('e',t==='e');
+  cur=t;const i=TABS.indexOf(t);$('#tabs').style.setProperty('--i',i);
   document.querySelectorAll('#tabs button').forEach(b=>{const on=b.dataset.t===t;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
-  $('#track').style.transform=t==='e'?'translateX(-100%)':'none';
-  $('#pt').inert=t!=='t';$('#pe').inert=t!=='e';fit()
+  $('#track').style.transform=i?'translateX(-'+(i*100)+'%)':'none';
+  TABS.forEach(x=>{$(PAN[x]).inert=x!==t});fit()
 }
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
-const ro=new ResizeObserver(fit);ro.observe($('#pt'));ro.observe($('#pe'));
+const ro=new ResizeObserver(fit);TABS.forEach(x=>ro.observe($(PAN[x])));
 let tx=null;
 $('#views').addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
 $('#views').addEventListener('touchend',e=>{
   if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;
-  if(d<-70&&cur==='t')tab('e');else if(d>70&&cur==='e')tab('t')
+  if(e.target.closest&&e.target.closest('input'))return;
+  const i=TABS.indexOf(cur);
+  if(d<-70&&i<TABS.length-1)tab(TABS[i+1]);else if(d>70&&i>0)tab(TABS[i-1])
 },{passive:true});
 addEventListener('keydown',e=>{
+  if(e.target&&e.target.closest&&e.target.closest('input,textarea'))return;   // escribiendo un nombre: no tratarlo como seña
   const k=e.key;
-  if(/^[a-z0-9]$/i.test(k))evento(k.toUpperCase());
+  if(/^[a-z0-9ñ]$/i.test(k))evento(k.toUpperCase());
   else if(k===' '){e.preventDefault();evento('SPACE')}
   else if(k==='Escape'){if(!$('#kiosk').hidden)cerrarKiosk();else evento('RESET')}
   else if(k==='Backspace'){text=text.slice(0,-1);render()}
 });
 $('#fs').onclick=abrirKiosk;$('#kx').onclick=cerrarKiosk;
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&!$('#kiosk').hidden)cerrarKiosk()});
+enlazar();construirUI();aplicar();poblarVoces();
+if(window.speechSynthesis)speechSynthesis.onvoiceschanged=poblarVoces;
 setConn(false);grid();render();tab('t');
 </script>
 </body>
